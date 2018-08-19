@@ -4,26 +4,29 @@ extern crate serde;
 
 use serde::Serialize;
 
+use std::io::Read;
+
 use reqwest::Client;
 use reqwest::Response;
 use reqwest::Error;
 use futures::Future;
 use futures::IntoFuture;
+use reqwest::RequestBuilder;
 
 
 pub struct SpaceXAPI {
     settings: Settings
 }
 struct Settings {
-    version: String,
-    host: String,
+    version: &'static str,
+    host: &'static str,
     ssl: bool,
     parse_json: bool
 }
 
 impl Settings {
-    pub fn new(version: String,
-               host: String,
+    pub fn new(version: &'static str,
+               host: &'static str,
                ssl: bool,
                parse_json: bool) -> Settings {
         Settings {
@@ -36,7 +39,7 @@ impl Settings {
 }
 
 impl SpaceXAPI {
-    pub fn new(host: Option<String>,
+    pub fn new(host: Option<&'static str>,
                ssl: Option<bool>,
                parse_json: Option<bool>) -> SpaceXAPI {
         let version = "v2";
@@ -77,8 +80,9 @@ impl SpaceXAPI {
         let uri = format!("{}{}{}", protocol, hostname, path);
         let mut req_builder = Client::new()
             .get(uri.as_str());
-        let _ = match filters {
-            Some(f) => req_builder.query(f)
+        let _ : &mut RequestBuilder = match filters {
+            Some(f) => req_builder.query(f),
+            None => &mut req_builder
         };
 
         req_builder
@@ -89,7 +93,7 @@ impl SpaceXAPI {
         self.request(path, filters)
     }
     pub fn get_company_info(&self) -> impl Future<Item=Response, Error=Error> {
-        self.get("/info", None)
+        self.get("/info", None::<&[(&str, &str)]>)
     }
 //    pub fn get_all_rockets() {}
 //    pub fn get_rocket() {}
@@ -110,8 +114,9 @@ impl SpaceXAPI {
 #[test]
 fn get_company_info(){
     let spacex_api = SpaceXAPI::new(None, None, None);
-    spacex_api.get_company_info().wait().map(|b| {
-        println!("{:?}", b);
-    })
+    spacex_api.get_company_info().wait().map(|mut b| {
+        assert_eq!(b.status(), reqwest::StatusCode::Ok);
+        println!("{:?}", b.text());
+    });
 }
 
