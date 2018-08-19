@@ -93,30 +93,201 @@ impl SpaceXAPI {
         self.request(path, filters)
     }
     pub fn get_company_info(&self) -> impl Future<Item=Response, Error=Error> {
-        self.get("/info", None::<&[(&str, &str)]>)
+        self.get("/info", None::<&()>)
     }
-//    pub fn get_all_rockets() {}
-//    pub fn get_rocket() {}
-//    pub fn get_all_capsules() {}
-//    pub fn get_capsule() {}
-//    pub fn get_all_launch_pads() {}
-//    pub fn get_launch_pad() {}
-//    pub fn get_latest_launch() {}
-//    pub fn get_all_launches() {}
-//    pub fn get_all_past_launches() {}
-//    pub fn get_all_upcoming_launches() {}
-//    pub fn get_all_capsule_parts() {}
-//    pub fn get_capsule_part() {}
-//    pub fn get_all_core_parts() {}
-//    pub fn get_core_part() {}
+    pub fn get_all_rockets(&self) -> impl Future<Item=Response, Error=Error> {
+        self.get("/rockets", None::<&()>)
+    }
+    pub fn get_rocket(&self, id: &'static str) -> impl Future<Item=Response, Error=Error> {
+        self.get(format!("/rockets/{}", id).as_str(), None::<&()>)
+    }
+    pub fn get_all_capsules(&self) -> impl Future<Item=Response, Error=Error> {
+        self.get("/capsules", None::<&()>)
+    }
+    pub fn get_capsule(&self, id: &'static str) -> impl Future<Item=Response, Error=Error> {
+        self.get(format!("/capsules/{}", id).as_str(), None::<&()>)
+    }
+    pub fn get_all_launch_pads(&self) -> impl Future<Item=Response, Error=Error> {
+        self.get("/launchpads", None::<&()>)
+    }
+    pub fn get_launch_pad(&self, id: &'static str) -> impl Future<Item=Response, Error=Error> {
+        self.get(format!("/launchpads/{}", id).as_str(), None::<&()>)
+    }
+    pub fn get_latest_launch(&self) -> impl Future<Item=Response, Error=Error> {
+        self.get("/launches/latest", None::<&()>)
+    }
+    pub fn get_all_launches(&self) -> impl Future<Item=Response, Error=Error> {
+        self.get("/launches/all", None::<&()>)
+    }
+    pub fn get_all_past_launches(&self) -> impl Future<Item=Response, Error=Error> {
+        self.get("/launches", None::<&()>)
+    }
+    pub fn get_all_upcoming_launches(&self) -> impl Future<Item=Response, Error=Error> {
+        self.get("/launches/upcoming", None::<&()>)
+    }
+    pub fn get_all_capsule_parts(&self) -> impl Future<Item=Response, Error=Error> {
+        self.get("/parts/caps", None::<&()>)
+    }
+    pub fn get_capsule_part(&self, id: &'static str) -> impl Future<Item=Response, Error=Error> {
+        self.get(format!("/parts/caps/{}", id).as_str(), None::<&()>)
+    }
+    pub fn get_all_core_parts(&self) -> impl Future<Item=Response, Error=Error> {
+        self.get("/parts/cores", None::<&()>)
+    }
+    pub fn get_core_part(&self, id: &'static str) -> impl Future<Item=Response, Error=Error> {
+        self.get(format!("/parts/cores/{}", id).as_str(), None::<&()>)
+    }
 }
 
 #[test]
 fn get_company_info(){
     let spacex_api = SpaceXAPI::new(None, None, None);
-    spacex_api.get_company_info().wait().map(|mut b| {
-        assert_eq!(b.status(), reqwest::StatusCode::Ok);
-        println!("{:?}", b.text());
+    spacex_api.get_company_info()
+        .wait()
+        .map(|mut b| {
+            assert_eq!(b.status(), reqwest::StatusCode::Ok);
+            println!("{:?}", b.text());
+    });
+}
+
+#[test]
+fn get_all_rockets() {
+    let spacex_api = SpaceXAPI::new(None, None, None);
+    spacex_api.get_company_info()
+        .wait()
+        .map(|mut b| {
+            assert_eq!(b.status(), reqwest::StatusCode::Ok);
+            println!("{:?}", b.text());
+    });
+}
+#[test]
+fn get_rocket() {
+    let spacex_api = SpaceXAPI::new(None, None, None);
+    spacex_api.get_company_info()
+        .wait()
+        .map(|mut b| {
+            assert_eq!(b.status(), reqwest::StatusCode::Ok);
+            println!("{:?}", b.text());
+    });
+}
+#[test]
+fn get_all_capsules() {
+    let spacex_api = SpaceXAPI::new(None, None, None);
+    spacex_api.get_company_info()
+        .wait()
+        .map(|mut b| {
+            assert_eq!(b.status(), reqwest::StatusCode::Ok);
+            println!("{:?}", b.text());
+    });
+}
+#[test]
+fn get_capsule() {
+    let spacex_api = SpaceXAPI::new(None, None, None);
+    spacex_api.get_company_info()
+        .wait()
+        .map(|mut b| {
+            assert_eq!(b.status(), reqwest::StatusCode::Ok);
+            println!("{:?}", b.text());
+    });
+}
+#[test]
+fn get_all_launch_pads() {
+    let spacex_api = SpaceXAPI::new(None, None, None);
+    spacex_api.get_company_info()
+        .wait()
+        .map(|mut b| {
+            assert_eq!(b.status(), reqwest::StatusCode::Ok);
+            println!("{:?}", b.text());
+    });
+}
+#[test]
+fn get_launch_pad() {
+    let spacex_api = SpaceXAPI::new(None, None, None);
+    spacex_api.get_company_info()
+        .wait()
+        .map(|mut b| {
+            assert_eq!(b.status(), reqwest::StatusCode::Ok);
+            println!("{:?}", b.text());
+    });
+}
+#[test]
+fn get_latest_launch() {
+    let spacex_api = SpaceXAPI::new(None, None, None);
+    spacex_api.get_company_info()
+        .wait()
+        .map(|mut b| {
+            assert_eq!(b.status(), reqwest::StatusCode::Ok);
+            println!("{:?}", b.text());
+    });
+}
+#[test]
+fn get_all_launches() {
+    let spacex_api = SpaceXAPI::new(None, None, None);
+    spacex_api.get_company_info()
+        .wait()
+        .map(|mut b| {
+            assert_eq!(b.status(), reqwest::StatusCode::Ok);
+            println!("{:?}", b.text());
+    });
+}
+#[test]
+fn get_all_past_launches() {
+    let spacex_api = SpaceXAPI::new(None, None, None);
+    spacex_api.get_company_info()
+        .wait()
+        .map(|mut b| {
+            assert_eq!(b.status(), reqwest::StatusCode::Ok);
+            println!("{:?}", b.text());
+    });
+}
+#[test]
+fn get_all_upcoming_launches() {
+    let spacex_api = SpaceXAPI::new(None, None, None);
+    spacex_api.get_company_info()
+        .wait()
+        .map(|mut b| {
+            assert_eq!(b.status(), reqwest::StatusCode::Ok);
+            println!("{:?}", b.text());
+    });
+}
+#[test]
+fn get_all_capsule_parts() {
+    let spacex_api = SpaceXAPI::new(None, None, None);
+    spacex_api.get_company_info()
+        .wait()
+        .map(|mut b| {
+            assert_eq!(b.status(), reqwest::StatusCode::Ok);
+            println!("{:?}", b.text());
+    });
+}
+#[test]
+fn get_capsule_part() {
+    let spacex_api = SpaceXAPI::new(None, None, None);
+    spacex_api.get_company_info()
+        .wait()
+        .map(|mut b| {
+            assert_eq!(b.status(), reqwest::StatusCode::Ok);
+            println!("{:?}", b.text());
+    });
+}
+#[test]
+fn get_all_core_parts() {
+    let spacex_api = SpaceXAPI::new(None, None, None);
+    spacex_api.get_company_info()
+        .wait()
+        .map(|mut b| {
+            assert_eq!(b.status(), reqwest::StatusCode::Ok);
+            println!("{:?}", b.text());
+    });
+}
+#[test]
+fn get_core_part() {
+    let spacex_api = SpaceXAPI::new(None, None, None);
+    spacex_api.get_company_info()
+        .wait()
+        .map(|mut b| {
+            assert_eq!(b.status(), reqwest::StatusCode::Ok);
+            println!("{:?}", b.text());
     });
 }
 
