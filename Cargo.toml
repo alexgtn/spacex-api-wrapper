@@ -6,3 +6,5 @@ authors = ["Alexandru Gutan <alex.gutan.m@gmail.com>"]
 [dependencies]
 reqwest = "0.8.8"
 futures = "0.1.23"
+serde_json = "1.0.26"
+

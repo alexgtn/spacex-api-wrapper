@@ -14,19 +14,19 @@ struct Settings {
     verson: String,
     host: String,
     ssl: bool,
-    parseJSON: bool
+    parse_json: bool
 }
 
 impl Settings {
     pub fn new(verson: String,
                host: String,
                ssl: bool,
-               parseJSON: bool) -> Settings {
+               parse_json: bool) -> Settings {
         Settings {
             verson,
             host,
             ssl,
-            parseJSON
+            parse_json
         }
     }
 }
@@ -34,29 +34,55 @@ impl Settings {
 impl SpaceXAPI {
     pub fn new(host: Option<String>,
                ssl: Option<bool>,
-               parseJSON: Option<bool>) -> SpaceXAPI {
+               parse_json: Option<bool>) -> SpaceXAPI {
         let version = "v2";
         let _host = match host {
             Some(h) => h,
             None => "api.spacexdata.com"
         };
-        let _ssl
+        let _ssl = match ssl {
+            Some(true) => true,
+            Some(false) => false,
+            None => false,
+
+        };
+        let _parse_json = match parse_json {
+            Some(true) => true,
+            Some(false) => false,
+            None => false,
+
+        };
         let settings = Settings {
             verson,
             host : _host,
-            ssl,
-            parseJSON
+            ssl: _ssl,
+            parse_json: _parse_json
         };
 
         SpaceXAPI {
             settings
         }
     }
-    fn get() -> impl Future<Response, Error> {
-        Client::new()
-            .get("https://hyper.rs")
+    fn request<T: Serialize + ?Sized>(&self, path: String, filters: Option<&T>) -> impl Future<Response, Error> {
+        let protocol = if self.settings.ssl {
+            "https:"
+        } else {
+            "http:"
+        };
+        let hostname = format!("{}/{}", self.settings.host, self.settings.verson);
+        let uri = format!("{}{}{}", protocol, hostname, path);
+        let mut req_builder = Client::new()
+            .get(uri);
+        match filters {
+            Some(f) => req_builder.query(f)
+        }
+
+        req_builder
             .send()
             .into_future()
+    }
+    fn get<T: Serialize + ?Sized>(&self, path: String, filters: Option<&T>) -> impl Future<Response, Error> {
+        self.request(path, filters)
     }
     pub fn get_company_info() {}
     pub fn get_all_rockets() {}
@@ -73,5 +99,11 @@ impl SpaceXAPI {
     pub fn get_capsule_part() {}
     pub fn get_all_core_parts() {}
     pub fn get_core_part() {}
+}
+
+#[test]
+fn get_company_info(){
+    let spacex_api = SpaceXAPI::new(None, None, None);
+    spacex_api.get_company_info();
 }
 
