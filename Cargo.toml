@@ -2,6 +2,12 @@
 name = "spacex-api-wrapper"
 version = "0.1.0"
 authors = ["Alexandru Gutan <alex.gutan.m@gmail.com>"]
+description = "SpaceX API Wrapper"
+readme = "README.md"
+homepage = "https://github.com/AGutan/spacex-api-wrapper"
+repository = "https://github.com/AGutan/spacex-api-wrapper.git"
+keywords = ["spacex", "api", "wrapper"]
+categories = ["api-wrapper", "aerospace-data", "rest-api"]
 
 [dependencies]
 reqwest = "0.8.8"
