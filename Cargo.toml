@@ -8,6 +8,7 @@ homepage = "https://github.com/AGutan/spacex-api-wrapper"
 repository = "https://github.com/AGutan/spacex-api-wrapper.git"
 keywords = ["spacex", "api", "wrapper"]
 categories = ["api-wrapper", "aerospace-data", "rest-api"]
+license = "MIT/Apache-2.0"
 
 [dependencies]
 reqwest = "0.8.8"

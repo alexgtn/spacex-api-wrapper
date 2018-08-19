@@ -5,8 +5,6 @@ extern crate serde;
 
 use serde::Serialize;
 
-use std::io::Read;
-
 use reqwest::Client;
 use reqwest::Response;
 use reqwest::Error;
