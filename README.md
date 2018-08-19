@@ -20,9 +20,9 @@ extern crate spacex_api_wrapper;
 use spacex_api_wrapper::SpaceXAPI;
 
 let spacex_api = SpaceXAPI::new(None, None, None);
-    spacex_api.get_company_info()
-        .wait()
-        .map(|mut b| {
-            println!("{:?}", b.text());
-        });
+spacex_api.get_company_info()
+    .wait()
+    .map(|mut b| {
+        println!("{:?}", b.text());
+    });
 ```
