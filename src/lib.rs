@@ -8,7 +8,6 @@ use reqwest::Response;
 use reqwest::Error;
 use futures::Future;
 use futures::IntoFuture;
-use reqwest::RequestBuilder;
 
 pub struct SpaceXAPI {
     settings: Settings
