@@ -11,7 +11,7 @@ See the full API reference [here](https://github.com/r-spacex/SpaceX-API/blob/ma
 Via `cargo`, add this to your project's `Cargo.toml`:
 ```Rust
 [dependencies]
-spacex-api-wrapper = "0.1.0"
+spacex-api-wrapper = "0.2.0"
 ```
 
 # Usage example
@@ -19,7 +19,7 @@ spacex-api-wrapper = "0.1.0"
 extern crate spacex_api_wrapper;
 use spacex_api_wrapper::SpaceXAPI;
 
-let spacex_api = SpaceXAPI::new(None, None, None);
+let spacex_api = SpaceXAPI::default();
 spacex_api.get_company_info()
     .wait()
     .map(|mut b| {
