@@ -9,6 +9,8 @@ use reqwest::Error;
 use futures::Future;
 use futures::IntoFuture;
 
+use std::default::Default;
+
 pub struct SpaceXAPI {
     settings: Settings
 }
@@ -31,6 +33,12 @@ impl Settings {
             ssl,
             parse_json,
         }
+    }
+}
+
+impl Default for SpaceXAPI {
+    fn default() -> Self {
+        SpaceXAPI::new(None, None, None)
     }
 }
 
