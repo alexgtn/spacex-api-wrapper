@@ -1,5 +1,5 @@
 # SpaceX API wrapper written in Rust
-
+[![SpaceX-API-Wrapper Crate](https://img.shields.io/crates/v/spacex-api-wrapper.svg)](https://crates.io/crates/spacex-api-wrapper)
 [![GitHub issues](https://img.shields.io/github/issues/AGutan/spacex-api-wrapper.svg)](https://github.com/AGutan/spacex-api-wrapper/issues)
 [![GitHub stars](https://img.shields.io/github/stars/AGutan/spacex-api-wrapper.svg)](https://github.com/AGutan/spacex-api-wrapper/stargazers)
 [![GitHub license](https://img.shields.io/github/license/AGutan/spacex-api-wrapper.svg)](https://github.com/AGutan/spacex-api-wrapper)
