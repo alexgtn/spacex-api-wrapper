@@ -1,6 +1,6 @@
 [package]
 name = "spacex-api-wrapper"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Alexandru Gutan <alex.gutan.m@gmail.com>"]
 description = "SpaceX API Wrapper"
 readme = "README.md"
